@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>LAB 6</title>
+       <style>
+#list1 {
+  height:200px; width:33%;
+  overflow:hidden; overflow-y:scroll;
+}
+
+#list2 {
+  height:200px; width:33%;
+  overflow:hidden; overflow-y:scroll;
+}
+
+.body {
+  height:100%; width:100%;
+}
+
+.main {
+  height:100%; width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div1 {
+  height:400px; width:50%;
+  position:relative;
+  float:left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div2 {
+  height:400px; width:50%;
+  position:relative;
+  float:left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mydiv{
+     height:50px; width:50px;
+           }
+
+.litem {
+  cursor: pointer;
+}
+</style>
+ 
+        
+        <script type = "application/javascript">
+         function requestColors() {
+		var colorData;
+
+		var oReq = new XMLHttpRequest();
+		oReq.onload = reqListener;
+		oReq.open("get", "colormap.json", true);
+		oReq.send();
+
+		function reqListener(e) {
+			colorData = JSON.parse(this.responseText);
+			
+			var i;
+
+			for (i = 0; i < colorData.length; i++)
+			{
+				var li = document.createElement("li");
+                var div = document.createElement("div");
+				li.className = "litem";
+				li.id = "list1" + i;
+                div.className = "mydiv";
+                div.id = "mydiv1" +i;
+				var t = document.createTextNode(colorData[i].color+"    ");
+                var s = document.createTextNode(colorData[i].value);
+                div.style.backgroundColor=colorData[i].value;
+				li.appendChild(t);
+                li.appendChild(s);
+                li.appendChild(div);
+				document.getElementById("list1").appendChild(li);
+			}
+
+						for (i = 0; i < colorData.length; i++)
+			{
+				var li = document.createElement("li");
+                var div = document.createElement("div");
+				li.className = "litem";
+				li.id = "list2" + i;
+                div.className = "mydiv";
+                div.id = "mydiv1" +i;
+				var t = document.createTextNode(colorData[i].color+"    ");
+                var s = document.createTextNode(colorData[i].value);
+                div.style.backgroundColor=colorData[i].value;
+				li.appendChild(t);
+                li.appendChild(s);
+                li.appendChild(div);
+				document.getElementById("list2").appendChild(li);
+			}
+		}
+	}
+      </script>
+        
+        
+
+    </head>
+    <body onload="requestColors();">
+        <div class="main">
+        <div class="div1">
+            <ul id="list1"></ul>
+        </div>
+        <div class="div2">
+            <ul id="list2"></ul>
+        </div>
+        </div>
+    </body>
+</html>
